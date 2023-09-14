@@ -1,0 +1,42 @@
+### Get All movies
+GET http://localhost:8888/api/v1/movies
+Accept: application/json
+Authorization: Bearer Rmlrb1JlZGhhRmViaWFuc3lhaA==
+
+### Create a new Category
+POST http://localhost:8888/api/v1/movies
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer Rmlrb1JlZGhhRmViaWFuc3lhaA==
+
+{
+    "title": "Movie 5",
+    "description": "movie The Best",
+    "rating": 5,
+    "image": "http://localhost:8888/"
+}
+
+### Get category by ID
+GET http://localhost:8888/api/v1/movies/1
+Accept: application/json
+Authorization: Bearer Rmlrb1JlZGhhRmViaWFuc3lhaA==
+
+### Update Category by ID
+PUT http://localhost:8888/api/v1/movies/1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer Rmlrb1JlZGhhRmViaWFuc3lhaA==
+
+{
+     "title": "Movie 2",
+    "description": "movie B AJa",
+    "rating": 4.2,
+    "image": "http://localhost:8888/"
+}
+
+
+### Delete Category ID
+DELETE http://localhost:8888/api/v1/movies/5
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer Rmlrb1JlZGhhRmViaWFuc3lhaA==

@@ -1,0 +1,248 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Go Movie Restful API",
+    "description": "API Spec For Movie Restful API",
+    "version": "1.0"
+  },
+  "servers": [{ "url": "http://localhost:8888/api/v1" }],
+  "paths": {
+    "/movies": {
+      "get": {
+        "security": [{ "MoviesAuth": [] }],
+        "tags": ["movies API"],
+        "description": "List all movies",
+        "summary": "List all movies",
+        "responses": {
+          "200": {
+            "description": "Success get all movies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Movie"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "security": [{ "MoviesAuth": [] }],
+
+        "tags": ["movies API"],
+        "description": "Create new movie",
+        "summary": "Create new movie",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrUpdateMovie"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success create movie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Movie"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/{movieId}": {
+      "get": {
+        "security": [{ "MoviesAuth": [] }],
+
+        "tags": ["movies API"],
+        "description": "Get movie ID description",
+        "summary": "Get movie ID description",
+        "parameters": [{ "$ref": "#/components/parameters/movieId" }],
+        "responses": {
+          "200": {
+            "description": "Success Get movie ID description",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Movie"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "security": [{ "MoviesAuth": [] }],
+
+        "tags": ["movies API"],
+        "description": "Update movie by ID",
+        "summary": "Update movie by ID",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/movieId"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrUpdateMovie"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success Update movie By Id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [{ "MoviesAuth": [] }],
+
+        "tags": ["movies API"],
+        "description": "Delete movie by ID",
+        "summary": "Delete movie by ID",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/movieId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success Delete movie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "message": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "MoviesAuth": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header",
+        "description": "Authorization for category API"
+      }
+    },
+    "schemas": {
+      "Movie": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "number"
+          },
+          "image": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateOrUpdateMovie": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "number"
+          },
+          "image": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "movieId": {
+        "name": "movieId",
+        "in": "path",
+        "description": "movie ID",
+        "required": true,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
